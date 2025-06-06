@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CosmeticLumea</string>
+    <string name="onboarding_title">Everything is There\nFor Your Beauty Needs</string>
+    <string name="onboarding_description">Cause everything starts with what you put on your skin, give the best magic for the beauty and health of your skin.</string>
+    <string name="onboarding_next_button">Next</string>
+
+    <string name="login_welcome_back">Welcome Back!</string>
+    <string name="login_username_email_hint">Username or Email</string>
+    <string name="login_password_hint">Password</string>
+    <string name="login_forgot_password">Forgot Password?</string>
+    <string name="login_sign_in_button">Sign In</string>
+    <string name="login_or_continue_with">OR Continue with</string>
+    <string name="login_no_account_prompt">Don\'t have an account?</string>
+    <string name="login_sign_up_link">Sign Up</string>
+
+    <string name="register_create_account">Create an Account!</string>
+    <string name="register_name_hint">Name</string>
+    <string name="register_terms_policy">By signing up, you agree to our Terms, Privacy Policy.</string>
+    <string name="register_create_account_button">Create Account</string>
+    <string name="register_have_account_prompt">Already have an account? </string>
+    <string name="register_sign_in_link">Sign In</string>
+    <string name="home_best_seller">Best Seller</string>
+    <string name="product_rating_description">Rating</string>
+    <string name="detail_description_header">Description</string>
+    <string name="detail_add_to_cart_button">Add to cart</string>
+    <string name="cart_title">Your Cart</string>
+    <string name="cart_empty_message">Your cart is currently empty.</string>
+    <string name="cart_encouragement_message">Start adding some amazing products!</string>
+    <string name="product_favorite_description">Add to Favorites</string>
+    <string name="generic_back">Back</string>
+    <string name="generic_search">Search</string>
+    <string name="generic_notifications">Notifications</string>
+    <string name="generic_cart">Cart</string>
+    <string name="bottom_nav_home">Home</string>
+    <string name="bottom_nav_cart">Cart</string>
+    <string name="bottom_nav_profile">Profile</string>
+    <string name="onboarding_image_content_description">Woman posing with beauty products</string>
+    <string name="icon_content_description">Icon</string>
+</resources>
