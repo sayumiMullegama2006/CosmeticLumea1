@@ -12,7 +12,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.cosmeticlumea.screens.LoginScreen // Import LoginScreen
+import com.example.cosmeticlumea.screens.LoginScreen
+
 import com.example.cosmeticlumea.screens.OnboardingScreen // Import OnboardingScreen
 import com.example.cosmeticlumea.ui.theme.CosmeticLumeaTheme
 
@@ -28,6 +29,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun CosmeticLumeaApp() {
     CosmeticLumeaTheme {
+
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
@@ -40,8 +42,12 @@ fun CosmeticLumeaApp() {
                 composable(Routes.LOGIN_SCREEN) {
                     LoginScreen(navController = navController)
                 }
-                // Add other composable routes here as you create more screens (e.g., RegisterScreen)
-                // composable(Routes.REGISTER_SCREEN) { RegisterScreen(navController = navController) }
+                composable(Routes.REGISTER_SCREEN) {
+                    LoginScreen(navController = navController)
+                }
+
+
+
             }
         }
     }
@@ -52,3 +58,4 @@ fun CosmeticLumeaApp() {
 fun DefaultPreview() {
     CosmeticLumeaApp()
 }
+

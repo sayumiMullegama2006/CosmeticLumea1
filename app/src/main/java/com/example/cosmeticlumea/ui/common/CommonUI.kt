@@ -13,16 +13,16 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color // Ensure Color is imported
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import com.example.cosmeticlumea.R // Import R for icon resources
+import com.example.cosmeticlumea.R
 
-// Reusable Custom Button (e.g., for Login/Register)
+// Reusable Custom Button (now uses MaterialTheme.colorScheme.primary for containerColor)
 @Composable
 fun PrimaryButton(
     text: String,
@@ -36,17 +36,17 @@ fun PrimaryButton(
             .fillMaxWidth()
             .height(50.dp),
         enabled = enabled,
-        shape = RoundedCornerShape(25.dp),
+        shape = RoundedCornerShape(25.dp), // Slightly rounded corners
         colors = ButtonDefaults.buttonColors(
-            containerColor = Color(0xFFFF8DA1), // The specific pink color you requested
-            contentColor = MaterialTheme.colorScheme.onPrimary
+            containerColor = MaterialTheme.colorScheme.primary, // Uses the primary color from your theme (hot pink)
+            contentColor = MaterialTheme.colorScheme.onPrimary // White text on primary color
         )
     ) {
         Text(text = text, style = MaterialTheme.typography.titleSmall)
     }
 }
 
-// Reusable Outlined Text Field (Corrected for Material3)
+// Reusable Outlined Text Field
 @Composable
 fun CustomOutlinedTextField(
     value: String,
@@ -55,7 +55,7 @@ fun CustomOutlinedTextField(
     modifier: Modifier = Modifier,
     keyboardType: KeyboardType = KeyboardType.Text,
     isPassword: Boolean = false,
-    leadingIconResId: Int? = null // Change to take resource ID
+    leadingIconResId: Int? = null // For drawable resources
 ) {
     OutlinedTextField(
         value = value,
@@ -67,7 +67,7 @@ fun CustomOutlinedTextField(
         visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None,
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
         modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp),
+        shape = RoundedCornerShape(12.dp), // Rounded corners for text fields
         singleLine = true,
         colors = OutlinedTextFieldDefaults.colors(
             focusedBorderColor = MaterialTheme.colorScheme.primary,
@@ -75,7 +75,7 @@ fun CustomOutlinedTextField(
             cursorColor = MaterialTheme.colorScheme.primary,
             focusedLeadingIconColor = MaterialTheme.colorScheme.primary,
             unfocusedLeadingIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
-            focusedContainerColor = MaterialTheme.colorScheme.surface,
+            focusedContainerColor = MaterialTheme.colorScheme.surface, // Background of the text field
             unfocusedContainerColor = MaterialTheme.colorScheme.surface
         )
     )

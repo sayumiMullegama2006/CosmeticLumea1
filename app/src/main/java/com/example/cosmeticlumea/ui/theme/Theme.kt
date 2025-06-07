@@ -1,3 +1,4 @@
+// File: ui/theme/Theme.kt
 package com.example.cosmeticlumea.ui.theme
 
 import android.app.Activity
@@ -20,17 +21,17 @@ private val DarkColorScheme = darkColorScheme(
     onPrimary = DarkOnPrimary,
     primaryContainer = DarkPrimaryContainer,
     onPrimaryContainer = DarkOnPrimaryContainer,
+    secondary = DarkSecondary,
+    onSecondary = DarkOnSecondary,
+    error = DarkError,
+    onError = DarkOnError,
     background = DarkBackground,
     onBackground = DarkOnBackground,
     surface = DarkSurface,
     onSurface = DarkOnSurface,
     surfaceVariant = DarkSurfaceVariant,
     onSurfaceVariant = DarkOnSurfaceVariant,
-    outline = DarkOutline,
-    secondary = DarkSecondary,
-    onSecondary = DarkOnSecondary,
-    error = DarkError,
-    onError = DarkOnError
+    outline = DarkOutline
 )
 
 private val LightColorScheme = lightColorScheme(
@@ -38,23 +39,23 @@ private val LightColorScheme = lightColorScheme(
     onPrimary = LightOnPrimary,
     primaryContainer = LightPrimaryContainer,
     onPrimaryContainer = LightOnPrimaryContainer,
+    secondary = LightSecondary,
+    onSecondary = LightOnSecondary,
+    error = LightError,
+    onError = LightOnError,
     background = LightBackground,
     onBackground = LightOnBackground,
     surface = LightSurface,
     onSurface = LightOnSurface,
     surfaceVariant = LightSurfaceVariant,
     onSurfaceVariant = LightOnSurfaceVariant,
-    outline = LightOutline,
-    secondary = LightSecondary,
-    onSecondary = LightOnSecondary,
-    error = LightError,
-    onError = LightOnError
+    outline = LightOutline
 )
 
 @Composable
 fun CosmeticLumeaTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = false, // Set to false to ensure your custom colors are always used
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
@@ -65,18 +66,20 @@ fun CosmeticLumeaTheme(
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
     }
+
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
             window.statusBarColor = colorScheme.primary.toArgb()
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
+            WindowCompat.getInsetsController(window, view)
+                .isAppearanceLightStatusBars = !darkTheme
         }
     }
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography, // Defined in Type.kt
+        typography = Typography,
         content = content
     )
 }

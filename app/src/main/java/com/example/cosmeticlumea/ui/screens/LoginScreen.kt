@@ -1,226 +1,196 @@
+// File: screens/LoginScreen.kt
 package com.example.cosmeticlumea.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Facebook
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material3.Divider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.cosmeticlumea.R
-import com.example.cosmeticlumea.Routes // Import Routes object
-import com.example.cosmeticlumea.ui.common.CustomOutlinedTextField
-import com.example.cosmeticlumea.ui.common.PrimaryButton
-import com.example.cosmeticlumea.ui.theme.CosmeticLumeaTheme
-import com.example.cosmeticlumea.ui.theme.LoginScreenBackground // Import the background color
+import com.example.cosmeticlumea.Routes
+import com.example.cosmeticlumea.ui.theme.LightPrimary
+
+// Custom font for "Lumea"
 
 @Composable
 fun LoginScreen(navController: NavController) {
-    var usernameOrEmail by remember { mutableStateOf("") }
+    var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var passwordVisible by remember { mutableStateOf(false) }
 
-    Box(
+    Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(LoginScreenBackground) // Pink background from Color.kt
+            .padding(24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Top
     ) {
-        Column(
+        Spacer(modifier = Modifier.height(64.dp))
+
+        // Circle with image inside
+        Box(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 24.dp), // Overall horizontal padding
-            horizontalAlignment = Alignment.CenterHorizontally
+                .size(120.dp)
+                .clip(CircleShape)
+                .background(Color.White),
+            contentAlignment = Alignment.Center
         ) {
-            Spacer(modifier = Modifier.height(60.dp)) // Space from top
-
-            // Lumea Logo with Cosmetics Image
             Image(
-                painter = painterResource(id = R.drawable.login_logo_cosmetics), // Your logo image
-                contentDescription = stringResource(R.string.app_name),
-                modifier = Modifier.size(150.dp), // Adjust size as needed
-                contentScale = ContentScale.Fit
+                painter = painterResource(id = R.drawable.onboarding_beauty_model), // Replace with actual logo
+                contentDescription = "Logo",
+                modifier = Modifier.size(100.dp)
             )
-            Spacer(modifier = Modifier.height(24.dp))
+        }
 
-            // Welcome Back! Text
+        Spacer(modifier = Modifier.height(12.dp))
+
+        Text(
+            text = "Lumea",
+            fontWeight = FontWeight.Bold,
+            fontSize = 32.sp,
+            color = LightPrimary
+        )
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        Text(
+            text = "Welcome\nBack!",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.Black,
+            lineHeight = 30.sp
+        )
+
+        Spacer(modifier = Modifier.height(32.dp))
+
+        // Username Field
+        OutlinedTextField(
+            value = username,
+            onValueChange = { username = it },
+            label = { Text("Username or Email") },
+            leadingIcon = { Icon(Icons.Default.Person, contentDescription = null) },
+            shape = RoundedCornerShape(16.dp),
+            modifier = Modifier.fillMaxWidth(),
+            singleLine = true
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Password Field
+        OutlinedTextField(
+            value = password,
+            onValueChange = { password = it },
+            label = { Text("Password") },
+            leadingIcon = { Icon(Icons.Default.Lock, contentDescription = null) },
+            trailingIcon = {
+                IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                    Icon(
+                        imageVector = if (passwordVisible) Icons.Default.VisibilityOff else Icons.Default.Visibility,
+                        contentDescription = null
+                    )
+                }
+            },
+            visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+            shape = RoundedCornerShape(16.dp),
+            modifier = Modifier.fillMaxWidth(),
+            singleLine = true
+        )
+
+        Spacer(modifier = Modifier.height(6.dp))
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.End
+        ) {
             Text(
-                text = stringResource(R.string.login_welcome_back),
-                style = MaterialTheme.typography.headlineSmall, // Uses adjusted font from Type.kt
-                color = MaterialTheme.colorScheme.onBackground
+                text = "Forgot Password?",
+                style = MaterialTheme.typography.labelMedium,
+                color = LightPrimary,
+                modifier = Modifier.clickable { }
             )
-            Spacer(modifier = Modifier.height(32.dp))
+        }
 
-            // Username or Email Field
-            CustomOutlinedTextField(
-                value = usernameOrEmail,
-                onValueChange = { usernameOrEmail = it },
-                label = stringResource(R.string.login_username_email_hint),
-                leadingIconResId = R.drawable.ic_person // Using a drawable for icon
-            )
-            Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(24.dp))
 
-            // Password Field
-            CustomOutlinedTextField(
-                value = password,
-                onValueChange = { password = it },
-                label = stringResource(R.string.login_password_hint),
-                isPassword = true,
-                leadingIconResId = R.drawable.ic_lock // Using a drawable for icon
-            )
-            Spacer(modifier = Modifier.height(16.dp))
+        // Sign In Button
+        Button(
+            onClick = { navController.navigate(Routes.HOME_SCREEN) },
+            shape = RoundedCornerShape(16.dp),
+            colors = ButtonDefaults.buttonColors(containerColor = LightPrimary),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(48.dp)
+        ) {
+            Text("Sign In", color = Color.White, fontSize = 16.sp)
+        }
 
-            // Forgot Password?
-            TextButton(
-                onClick = { /* Handle forgot password click */ },
-                modifier = Modifier.align(Alignment.End)
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Text("- OR Continue With -", color = Color.Gray, fontSize = 14.sp)
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Social Icons
+        Row(horizontalArrangement = Arrangement.spacedBy(24.dp)) {
+            IconButton(
+                onClick = {},
+                modifier = Modifier
+                    .size(48.dp)
+                    .clip(CircleShape)
+                    .background(Color.LightGray)
             ) {
-                Text(
-                    text = stringResource(R.string.login_forgot_password),
-                    style = MaterialTheme.typography.bodyMedium.copy(
-                        color = MaterialTheme.colorScheme.primary, // Pink color
-                        fontWeight = FontWeight.Medium,
-                        textDecoration = TextDecoration.Underline // Underline for link appearance
-                    )
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_google_logo), // Add this to drawable
+                    contentDescription = "Google",
+                    tint = Color.Unspecified
                 )
             }
-            Spacer(modifier = Modifier.height(32.dp))
-
-            // Sign In Button
-            PrimaryButton(
-                text = stringResource(R.string.login_sign_in_button),
-                onClick = { /* Handle Sign In */ }
-            )
-            Spacer(modifier = Modifier.height(24.dp))
-
-            // OR Continue with divider
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            IconButton(
+                onClick = {},
+                modifier = Modifier
+                    .size(48.dp)
+                    .clip(CircleShape)
+                    .background(Color.LightGray)
             ) {
-                Divider(
-                    modifier = Modifier.weight(1f),
-                    color = MaterialTheme.colorScheme.outline.copy(alpha = 0.5f),
-                    thickness = 1.dp
-                )
-                Text(
-                    text = stringResource(R.string.login_or_continue_with),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-                Divider(
-                    modifier = Modifier.weight(1f),
-                    color = MaterialTheme.colorScheme.outline.copy(alpha = 0.5f),
-                    thickness = 1.dp
-                )
-            }
-            Spacer(modifier = Modifier.height(24.dp))
-
-            // Social Login Buttons (Google, Facebook)
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                // Google Button
-                Box(
-                    modifier = Modifier
-                        .size(50.dp)
-                        .clip(RoundedCornerShape(12.dp))
-                        .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f))
-                        .padding(12.dp)
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.google_icon), // Google icon
-                        contentDescription = stringResource(R.string.icon_content_description),
-                        modifier = Modifier.fillMaxSize()
-                    )
-                }
-                Spacer(modifier = Modifier.width(24.dp))
-                // Facebook Button
-                Box(
-                    modifier = Modifier
-                        .size(50.dp)
-                        .clip(RoundedCornerShape(12.dp))
-                        .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f))
-                        .padding(12.dp)
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.facebook_icon), // Facebook icon
-                        contentDescription = stringResource(R.string.icon_content_description),
-                        modifier = Modifier.fillMaxSize()
-                    )
-                }
-            }
-            Spacer(modifier = Modifier.height(32.dp))
-
-            // Create An Account? Sign Up
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = stringResource(R.string.login_no_account_prompt),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-                TextButton(
-                    onClick = { /* Handle Sign Up navigation */
-                        navController.navigate(Routes.REGISTER_SCREEN) // Navigate to register screen
-                    }
-                ) {
-                    Text(
-                        text = stringResource(R.string.login_sign_up_link),
-                        style = MaterialTheme.typography.labelMedium.copy(
-                            color = MaterialTheme.colorScheme.primary, // Pink color
-                        )
-                    )
-                }
+                Icon(Icons.Default.Facebook, contentDescription = "Facebook", tint = Color(0xFF4267B2))
             }
         }
-    }
-}
 
-@Preview(showBackground = true)
-@Composable
-fun LoginScreenPreview() {
-    CosmeticLumeaTheme {
-        LoginScreen(navController = rememberNavController())
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Row {
+            Text("Create An Account? ")
+            Text(
+                text = "Sign Up",
+                color = LightPrimary,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.clickable {
+                    navController.navigate(Routes.REGISTER_SCREEN)
+                }
+            )
+        }
     }
 }

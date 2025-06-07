@@ -1,21 +1,14 @@
+// File: screens/OnboardingScreen.kt
 package com.example.cosmeticlumea.screens
 
+import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,74 +16,70 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.cosmeticlumea.R
-import com.example.cosmeticlumea.Routes // Import Routes
+import com.example.cosmeticlumea.Routes
 import com.example.cosmeticlumea.ui.common.PrimaryButton
 import com.example.cosmeticlumea.ui.theme.CosmeticLumeaTheme
 
 @Composable
 fun OnboardingScreen(navController: NavController) {
-    Box(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        // Top section: Beauty model image fills this entire space
+    val configuration = LocalConfiguration.current
+    val isPortrait = configuration.orientation == Configuration.ORIENTATION_PORTRAIT
+
+    val backgroundImage = if (isPortrait) {
+        painterResource(id = R.drawable.onboarding_beauty_model)
+    } else {
+        painterResource(id = R.drawable.onboarding_beauty_model_landscape) // <-- Add landscape image to `res/drawable`
+    }
+
+    Box(modifier = Modifier.fillMaxSize()) {
         Image(
-            painter = painterResource(id = R.drawable.onboarding_beauty_model),
+            painter = backgroundImage,
             contentDescription = stringResource(R.string.onboarding_image_content_description),
             contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(0.7f)
-                .align(Alignment.TopCenter)
+            modifier = Modifier.fillMaxSize()
         )
 
-        // Bottom Content Card (white, rounded top)
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(0.45f)
+                .align(Alignment.BottomCenter)
                 .clip(RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp))
                 .background(MaterialTheme.colorScheme.surface)
-                .align(Alignment.BottomCenter)
-                .padding(horizontal = 24.dp, vertical = 32.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Top
+                .verticalScroll(rememberScrollState())
+                .padding(
+                    horizontal = if (isPortrait) 24.dp else 36.dp,
+                    vertical = if (isPortrait) 32.dp else 20.dp
+                ),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Spacer(modifier = Modifier.height(if (isPortrait) 16.dp else 12.dp))
             Text(
                 text = stringResource(R.string.onboarding_title),
-                style = MaterialTheme.typography.headlineSmall.copy(
-                    fontWeight = FontWeight.ExtraBold,
-                    fontSize = 28.sp
-                ),
+                style = MaterialTheme.typography.headlineMedium,
                 textAlign = TextAlign.Center,
-                color = MaterialTheme.colorScheme.onSurface
+                modifier = Modifier.fillMaxWidth()
             )
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(12.dp))
             Text(
                 text = stringResource(R.string.onboarding_description),
-                style = MaterialTheme.typography.bodyLarge.copy(
-                    fontWeight = FontWeight.Normal,
-                    fontSize = 16.sp
-                ),
+                style = MaterialTheme.typography.bodyLarge,
                 textAlign = TextAlign.Center,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
+                modifier = Modifier.fillMaxWidth()
             )
-            Spacer(modifier = Modifier.height(48.dp))
+            Spacer(modifier = Modifier.height(if (isPortrait) 36.dp else 20.dp))
 
-            // Pagination Dots
             Row(
-                modifier = Modifier.padding(bottom = 24.dp),
                 horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
+                modifier = Modifier.fillMaxWidth()
             ) {
                 Box(
                     modifier = Modifier
@@ -114,20 +103,20 @@ fun OnboardingScreen(navController: NavController) {
                 )
             }
 
-            // "Next" button - NOW WITH NAVIGATION ACTIVATED!
+            Spacer(modifier = Modifier.height(if (isPortrait) 24.dp else 16.dp))
+
             PrimaryButton(
                 text = stringResource(R.string.onboarding_next_button),
-                onClick = {
-                    navController.navigate(Routes.LOGIN_SCREEN) // <-- This line is now active
-                }
+                onClick = { navController.navigate(Routes.LOGIN_SCREEN) },
+                modifier = Modifier.fillMaxWidth()
             )
         }
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showSystemUi = true)
 @Composable
-fun OnboardingPreview() {
+fun OnboardingScreenPreview() {
     CosmeticLumeaTheme {
         OnboardingScreen(navController = rememberNavController())
     }

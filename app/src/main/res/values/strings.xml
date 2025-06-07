@@ -14,27 +14,38 @@
     <string name="login_no_account_prompt">Don\'t have an account?</string>
     <string name="login_sign_up_link">Sign Up</string>
 
-    <string name="register_create_account">Create an Account!</string>
+    <string name="register_create_account">Create An Account!</string>
     <string name="register_name_hint">Name</string>
+    <string name="register_email_hint">Email Address</string>
+    <string name="register_phone_hint">Phone Number</string>
+    <string name="register_password_hint">Password</string>
+    <string name="register_confirm_password_hint">Confirm Password</string>
     <string name="register_terms_policy">By signing up, you agree to our Terms, Privacy Policy.</string>
     <string name="register_create_account_button">Create Account</string>
-    <string name="register_have_account_prompt">Already have an account? </string>
+    <string name="register_have_account_prompt">Already have an account?</string>
     <string name="register_sign_in_link">Sign In</string>
-    <string name="home_best_seller">Best Seller</string>
-    <string name="product_rating_description">Rating</string>
-    <string name="detail_description_header">Description</string>
-    <string name="detail_add_to_cart_button">Add to cart</string>
-    <string name="cart_title">Your Cart</string>
-    <string name="cart_empty_message">Your cart is currently empty.</string>
-    <string name="cart_encouragement_message">Start adding some amazing products!</string>
-    <string name="product_favorite_description">Add to Favorites</string>
+
+    <string name="bottom_nav_home">Home</string>
+    <string name="bottom_nav_cart">Cart</string>
+    <string name="bottom_nav_profile">Profile</string>
+    <string name="bottom_nav_categories">Categories</string>
+
     <string name="generic_back">Back</string>
     <string name="generic_search">Search</string>
     <string name="generic_notifications">Notifications</string>
     <string name="generic_cart">Cart</string>
-    <string name="bottom_nav_home">Home</string>
-    <string name="bottom_nav_cart">Cart</string>
-    <string name="bottom_nav_profile">Profile</string>
     <string name="onboarding_image_content_description">Woman posing with beauty products</string>
     <string name="icon_content_description">Icon</string>
+
+    <string name="home_screen_title">Discover Products</string>
+    <string name="cart_screen_title">Your Shopping Cart</string>
+    <string name="cart_empty_message">Your cart is currently empty.</string>
+    <string name="profile_screen_title">My Profile</string>
+    <string name="categories_screen_title">Product Categories</string>
+    <string name="product_detail_title">Product Details</string>
+    <string name="product_name_placeholder">Product Name</string>
+    <string name="product_price_placeholder">$0.00</string>
+    <string name="product_rating_description">Rating</string>
+    <string name="detail_description_header">Description</string>
+    <string name="detail_add_to_cart_button">Add to cart</string>
 </resources>
