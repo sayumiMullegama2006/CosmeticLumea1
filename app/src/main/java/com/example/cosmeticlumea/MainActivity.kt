@@ -13,9 +13,13 @@ import androidx.core.view.WindowCompat
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.cosmeticlumea.screens.LoginScreen
+import com.example.cosmeticlumea.screens.RegisterScreen
 import com.example.cosmeticlumea.ui.screens.OnboardingScreen
 import com.example.cosmeticlumea.ui.screens.SplashScreen // 1. IMPORT SplashScreen
 import com.example.cosmeticlumea.ui.theme.CosmeticLumeaTheme
+
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +51,13 @@ fun CosmeticLumeaApp() {
                 composable(Routes.ONBOARDING_SCREEN) {
                     OnboardingScreen(navController = navController)
                 }
-                // Add other screens like Login, Register here
+                composable(Routes.LOGIN_SCREEN) {
+                    LoginScreen(navController = navController)
+                }
+                composable(Routes.REGISTER_SCREEN) {
+                    RegisterScreen(navController = navController)
+                }
+
             }
         }
     }

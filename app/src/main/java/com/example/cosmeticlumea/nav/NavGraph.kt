@@ -6,6 +6,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.cosmeticlumea.Routes
+import com.example.cosmeticlumea.screens.LoginScreen
+import com.example.cosmeticlumea.screens.RegisterScreen
 import com.example.cosmeticlumea.ui.screens.OnboardingScreen
 import com.example.cosmeticlumea.ui.screens.SplashScreen
 
@@ -22,7 +24,12 @@ fun NavGraph(navController: NavHostController, modifier: Modifier = Modifier) {
         composable(Routes.SPLASH_SCREEN) {
             SplashScreen(navController = navController)
         }
-
+        composable(Routes.LOGIN_SCREEN) {
+            LoginScreen(navController = navController)
+        }
+        composable(Routes.REGISTER_SCREEN) {
+            RegisterScreen(navController = navController)
+        }
 
     }
 }

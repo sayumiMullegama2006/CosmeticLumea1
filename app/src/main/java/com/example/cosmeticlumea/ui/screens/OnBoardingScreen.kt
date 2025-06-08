@@ -1,4 +1,3 @@
-// File: screens/OnboardingScreen.kt
 package com.example.cosmeticlumea.ui.screens
 
 import android.content.res.Configuration
@@ -18,7 +17,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.stringResource // Make sure this is imported
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -81,6 +80,7 @@ fun OnboardingScreen(navController: NavController) {
                 horizontalArrangement = Arrangement.Center,
                 modifier = Modifier.fillMaxWidth()
             ) {
+                // These represent pagination dots. You'd typically animate them.
                 Box(
                     modifier = Modifier
                         .size(10.dp)
