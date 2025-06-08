@@ -4,6 +4,8 @@ package com.example.cosmeticlumea.ui.theme
 import androidx.compose.ui.graphics.Color
 
 // Light Theme Colors
+val SoftPink = Color(0xFFFDE4E6)
+val PureWhite = Color.White
 val LightPrimary = Color(0xFFFF0066)
 val LightOnPrimary = Color(0xFFFFFFFF)
 val LightPrimaryContainer = Color(0xFFFFD9E2)
@@ -56,3 +58,22 @@ val DarkOutline = Color(0xFF616161)
 // Custom
 val OnboardingScreenBackground = Color(0xFFFDE4E6)
 val AuthScreenBackground = Color(0xFFFDE4E6)
+
+
+// Your primary brand pink
+val PrimaryPink = Color(0xFFFC8A8D) // Based on the button color
+val DarkPink = Color(0xFFE44A5B)   // A slightly darker pink for variations
+
+// Background gradient colors
+val LightPinkBackground = Color(0xFFFDE4E6) // From your splash/login screen background
+val WhiteBackground = Color.White
+
+// Text Colors
+val TextPrimary = Color(0xFF1C1B1F) // Dark text for headings
+val TextSecondary = Color(0xFF49454F) // Greyish text for secondary info
+val TextLink = Color(0xFFE44A5B) // For links like "Forgot Password?" or "Sign Up"
+
+// Other UI elements
+val FieldBackground = Color(0xFFF0F0F0) // Light grey for input fields
+val BorderColor = Color(0xFFE0E0E0) // Light border color for fields
+val SocialButtonBackground = Color.White

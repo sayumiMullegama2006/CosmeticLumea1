@@ -1,5 +1,5 @@
 // File: screens/OnboardingScreen.kt
-package com.example.cosmeticlumea.screens
+package com.example.cosmeticlumea.ui.screens
 
 import android.content.res.Configuration
 import androidx.compose.foundation.Image

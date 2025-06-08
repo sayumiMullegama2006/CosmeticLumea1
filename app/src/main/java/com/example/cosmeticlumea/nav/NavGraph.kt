@@ -5,9 +5,9 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
 import com.example.cosmeticlumea.Routes
-import com.example.cosmeticlumea.screens.* // Import all screens from your 'screens' package
+import com.example.cosmeticlumea.ui.screens.OnboardingScreen
+import com.example.cosmeticlumea.ui.screens.SplashScreen
 
 @Composable
 fun NavGraph(navController: NavHostController, modifier: Modifier = Modifier) {
@@ -19,10 +19,9 @@ fun NavGraph(navController: NavHostController, modifier: Modifier = Modifier) {
         composable(Routes.ONBOARDING_SCREEN) {
             OnboardingScreen(navController = navController)
         }
-        composable(Routes.LOGIN_SCREEN) {
-            LoginScreen(navController)
+        composable(Routes.SPLASH_SCREEN) {
+            SplashScreen(navController = navController)
         }
-
 
 
     }

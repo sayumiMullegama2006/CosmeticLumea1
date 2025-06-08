@@ -1,1 +1,1 @@
-package com.example.cosmeticlumea.screens
+package com.example.cosmeticlumea.ui.screens
